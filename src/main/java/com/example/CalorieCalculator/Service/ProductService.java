@@ -42,6 +42,16 @@ public class ProductService {
 
     public List<Product> findAll() {
 
+        List<Product> allProducts = productRepository.findAll();
+
+        for (int i = 0; i <allProducts.size(); i++){
+
+
+            System.out.println("Nazwa produktu: " + allProducts.get(i).getProductName());
+            System.out.println("Kalorie w 100g: " + allProducts.get(i).getProductCalories());
+
+        }
+
         return productRepository.findAll();
 
     }

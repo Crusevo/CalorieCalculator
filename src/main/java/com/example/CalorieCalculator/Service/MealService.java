@@ -49,8 +49,6 @@ public class MealService {
         List<Product> productFromDatabaseList = productRepository.findByProductName(product.getProductName());
 
 
-
-
         if (mealFromDataBaseList.isEmpty()){
 
             System.out.println("Brak posiłku o tej nazwie w bazie danych");
@@ -70,11 +68,19 @@ public class MealService {
 
             Meal mealFromDataBase = mealFromDataBaseList.get(0);
 
+            int mealFromDatabaseCalories = mealFromDataBase.getMealCalories();
+
+            int addingCaloriesToMeal = mealFromDatabaseCalories + product.getProductCalories();
+
+            mealFromDataBase.setMealCalories(addingCaloriesToMeal);
+
             List<Product> productList = mealFromDataBase.getProductList();
 
             boolean contains = productList.contains(product);
 
             if (contains){
+
+                mealFromDataBase.setMealCalories(mealFromDatabaseCalories);
 
                 System.out.println("Produkt jest juz przypisany do posiłku");
 
@@ -98,15 +104,17 @@ public class MealService {
 
             productList.add(product);
 
+            int mealFromDatabaseCalories = mealFromDataBase.getMealCalories();
+
+            int addingCaloriesToMeal = mealFromDatabaseCalories + product.getProductCalories();
+
+            mealFromDataBase.setMealCalories(addingCaloriesToMeal);
+
             mealRepository.save(mealFromDataBase);
 
         }
 
-
-
-
         return product;
-
 
     }
 
