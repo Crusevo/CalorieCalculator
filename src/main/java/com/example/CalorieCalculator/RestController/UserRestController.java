@@ -3,10 +3,7 @@ package com.example.CalorieCalculator.RestController;
 import com.example.CalorieCalculator.Model.User;
 import com.example.CalorieCalculator.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,6 +24,14 @@ public class UserRestController {
     public User addUser (@RequestBody User user){
 
         return userService.addUser(user);
+
+    }
+
+    @PutMapping("/addFavoriteMeal/{userName}/{mealName}/")
+    public User addFavoriteMeal(@PathVariable ("mealName") String mealName, @PathVariable ("userName") String userName){
+
+
+        return userService.addFavoriteMeal(mealName, userName);
 
     }
 
